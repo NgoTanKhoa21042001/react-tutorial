@@ -1,42 +1,46 @@
-import logo from "./logo.svg";
+import { Component } from "react";
 import "./App.css";
-import "./components/Loading/Loading";
-import Loading from "./components/Loading/Loading";
-function App() {
-  const name = "Hau";
-  const age = 12;
-  const isFemale = true;
-  const students = {
-    name: "Easy Frontend",
+
+class App extends Component {
+  // Properties
+  state = {
+    fullName: "Tan Khoa",
+    address: "Da Nang",
+    counter: 0,
+    isDisplayed: false,
   };
 
-  const colorList = ["yellow", "green", "blue", "purple"];
+  // Function methods
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+  incrementCounter = () => {
+    this.setState({
+      counter: this.state.counter + 1,
+    });
+  };
+  decrementCounter = () => {
+    this.setState({
+      counter: this.state.counter - 1,
+    });
+  };
 
-        <p>
-          {name} - {age}
-        </p>
-        {isFemale ? <p>Male</p> : <p>Female </p>}
+  setDisplayed = () => {
+    this.setState({
+      isDisplayed: !this.state.isDisplayed,
+    });
+  };
 
-        {isFemale && (
-          <>
-            <p>Male</p>
-            <p>Male</p>
-            <p>Male</p>
-          </>
-        )}
-
-        {colorList.map((color) => (
-          <li style={{ color }}>{color}</li>
-        ))}
-        <Loading />
-      </header>
-    </div>
-  );
+  render() {
+    return (
+      <div>
+        <h1>Hello {this.state.fullName}</h1>
+        {this.state.isDisplayed && <h2>Tôi sống ở: {this.state.address}</h2>}
+        <p>Counter: {this.state.counter}</p>
+        <button onClick={this.incrementCounter}>Icrease Counter</button>
+        <button onClick={this.decrementCounter}>Decrease Counter</button>
+        <button onClick={this.setDisplayed}>Set Display</button>
+      </div>
+    );
+  }
 }
 
 export default App;
